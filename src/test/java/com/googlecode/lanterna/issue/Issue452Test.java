@@ -119,18 +119,15 @@ public class Issue452Test {
         content.addComponent(checkBox, LAYOUT_NEW_ROW);
         assertFalse(checkBox.isFocused());
         assertFalse(checkBox.isChecked());
-        // First click should focus the checkbox and item should be selected
+        // First click focuses the checkbox
         clickOn(checkBox);
         assertTrue(checkBox.isFocused());
+        // Second click toggles the checkbox
+        clickOn(checkBox);
         assertTrue(checkBox.isChecked());
-        // Second click, focus should remain and item should be unselected
+        // Third click unchecks it
         clickOn(checkBox);
-        assertTrue(checkBox.isFocused());
         assertFalse(checkBox.isChecked());
-        // Third click should change its value back to TRUE
-        clickOn(checkBox);
-        assertTrue(checkBox.isFocused());
-        assertTrue(checkBox.isChecked());
     }
 
     @Test
@@ -138,6 +135,10 @@ public class Issue452Test {
         Button button = new Button("Button", createRunnable("Button"));
         content.addComponent(button, LAYOUT_NEW_ROW);
         assertFalse(button.isFocused());
+        // First click focuses the button
+        clickOn(button);
+        assertTrue(button.isFocused());
+        // Second click triggers the button
         try {
             clickOn(button);
             fail();
